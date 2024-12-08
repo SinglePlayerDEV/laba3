@@ -1,0 +1,64 @@
+#include <iostream> 
+#include <math.h> 
+
+
+using namespace std;
+
+int main() 
+{
+	double x, xn, xk, dx, eps;
+
+	
+	
+	cout << "enter x ";
+	cin >> x;
+	
+	if (x < 1) {
+		cout << "exit pls dont cry baby" << endl;
+		system("pause");
+	}
+	
+	
+	cout << "enter xn ";
+	cin >> xn;
+	cout << "enter xk ";
+	cin >> xk;
+	
+	if (xn > xk) {
+		cout << "error!!! try a second time" << endl;
+		system("pause");
+	}
+	cout << "enter dx ";
+	cin >> dx;
+	cout << "enter eps ";
+	cin >> eps;
+
+	bool done = true; // признак достижения точности
+
+	double  ch = x, y = ch; // ch первый член ряда
+	
+	cout << "-----------------------------------------------" << endl;
+	cout << "|   x   |   y      |  xn |  xk |  dx   |  ps  |" << endl;
+	cout << "-----------------------------------------------" << endl;
+	for (int i = 0; fabs(ch) > eps; i++) 
+	{
+		x += dx;
+		ch *= 2*((1 / x) + (1 / 3 * pow(x, 3)) + (1 / 5 * pow(x, 5))); // очередной член ряда 
+		y += ch; // добавление члена ряда к сумме
+
+		if (xn > xk)
+		{
+			cout << "\nRyad razoshelsya";
+			done = false; break; // break прервывает работу цикала 
+		}
+		
+		if (done) {
+			cout.precision(5);
+			cout << "|  " << x << "  |  " << y << "  |  " << xn << "  |  " << xk << "  |  " << dx << "  |  " << eps << "|" << endl;
+			
+		}
+		
+	}
+	cout << "-----------------------------------------------|" << endl;
+	return 0;
+}
